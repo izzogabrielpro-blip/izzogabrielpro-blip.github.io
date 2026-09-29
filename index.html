@@ -4,293 +4,52 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Gabriel Izzo — Portfolio</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bg:#07080d;
-    --glass:rgba(255,255,255,0.045);
-    --glass-strong:rgba(255,255,255,0.07);
-    --border:rgba(255,255,255,0.09);
-    --border-hover:rgba(255,255,255,0.18);
-    --text:#f2f3f7;
-    --muted:#8b90a3;
-    --violet:#8b5cf6;
-    --cyan:#22d3ee;
-    --gradient:linear-gradient(120deg, var(--violet), var(--cyan));
-    --sans:'Inter', sans-serif;
-    --display:'Space Grotesk', sans-serif;
-    --mono:'JetBrains Mono', monospace;
-  }
-  *{margin:0;padding:0;box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{
-    background:var(--bg); color:var(--text);
-    font-family:var(--sans); line-height:1.65;
-    -webkit-font-smoothing:antialiased;
-    position:relative; overflow-x:hidden;
-  }
-  ::selection{background:var(--violet); color:#fff;}
-  a{color:inherit;}
-
-  .blob{position:fixed; border-radius:50%; filter:blur(90px); z-index:0; pointer-events:none;}
-  .blob-1{width:520px; height:520px; top:-160px; left:-120px; background:radial-gradient(circle, rgba(139,92,246,0.35), transparent 70%);}
-  .blob-2{width:600px; height:600px; top:20%; right:-200px; background:radial-gradient(circle, rgba(34,211,238,0.25), transparent 70%);}
-  .blob-3{width:460px; height:460px; bottom:-140px; left:20%; background:radial-gradient(circle, rgba(139,92,246,0.18), transparent 70%);}
-
-  body::before{
-    content:""; position:fixed; inset:0; z-index:0;
-    background-image:
-      linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
-    background-size:56px 56px;
-    mask-image:radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
-  }
-
-  .eyebrow{
-    font-family:var(--mono); font-size:0.75rem;
-    background:var(--gradient); -webkit-background-clip:text; background-clip:text; color:transparent;
-    letter-spacing:0.08em; text-transform:uppercase;
-    margin-bottom:16px; display:inline-block; font-weight:500;
-  }
-  h1,h2,h3{font-family:var(--display); letter-spacing:-0.01em;}
-
-  header.nav{
-    position:sticky; top:0; z-index:50;
-    display:flex; justify-content:space-between; align-items:center;
-    padding:18px 6vw;
-    background:rgba(7,8,13,0.6);
-    backdrop-filter:blur(16px);
-    border-bottom:1px solid var(--border);
-  }
-  .logo{font-family:var(--display); font-weight:700; font-size:1.05rem;}
-  .logo span{background:var(--gradient); -webkit-background-clip:text; background-clip:text; color:transparent;}
-  nav.links{display:flex; gap:32px; font-size:0.9rem; font-weight:500;}
-  nav.links a{text-decoration:none; color:var(--muted); transition:color .2s;}
-  nav.links a:hover{color:var(--text);}
-  @media (max-width:760px){ nav.links{display:none;} }
-
-  main{max-width:880px; margin:0 auto; padding:0 6vw; position:relative; z-index:1;}
-  section{padding:100px 0; border-bottom:1px solid var(--border);}
-  section:last-of-type{border-bottom:none;}
-  @media (max-width:760px){ section{padding:64px 0;} }
-
-  .hero{padding-top:120px;}
-  .hero h1{
-    font-size:clamp(2.6rem,6.5vw,4.4rem); line-height:1.05;
-    background:linear-gradient(180deg, #ffffff, #b9bcc9);
-    -webkit-background-clip:text; background-clip:text; color:transparent;
-  }
-  .hero .role{font-family:var(--mono); color:var(--muted); font-size:1rem; margin-top:18px;}
-  .hero .lede{max-width:560px; margin-top:22px; color:var(--muted); font-size:1.08rem;}
-  .prompt{
-    font-family:var(--mono); font-size:0.85rem; margin-top:32px;
-    display:inline-flex; align-items:center; gap:2px;
-    background:var(--glass); border:1px solid var(--border);
-    padding:10px 16px; border-radius:8px; color:var(--cyan);
-  }
-  .prompt .cursor{display:inline-block; width:8px; height:15px; background:var(--cyan); margin-left:4px; animation:blink 1s step-end infinite;}
-  @keyframes blink{ 50%{opacity:0;} }
-  .tags{display:flex; flex-wrap:wrap; gap:10px; margin-top:36px;}
-  .tag{
-    font-family:var(--mono); font-size:0.78rem; color:var(--text);
-    background:var(--glass); border:1px solid var(--border);
-    padding:8px 14px; border-radius:8px; backdrop-filter:blur(10px);
-    transition:border-color .2s, transform .2s;
-  }
-  .tag:hover{border-color:var(--violet); transform:translateY(-2px);}
-
-  .cta-row{display:flex; flex-wrap:wrap; gap:14px; margin-top:32px;}
-  .btn-cv{
-    font-family:var(--mono); font-size:0.85rem; font-weight:500;
-    color:#07080d; background:var(--gradient);
-    padding:12px 20px; border-radius:9px; text-decoration:none;
-    display:inline-flex; align-items:center; gap:8px;
-    box-shadow:0 8px 24px rgba(139,92,246,0.28);
-    transition:transform .2s, box-shadow .2s;
-  }
-  .btn-cv:hover{transform:translateY(-2px); box-shadow:0 10px 30px rgba(139,92,246,0.4);}
-  .btn-cv svg{width:15px; height:15px;}
-  .btn-ghost{
-    font-family:var(--mono); font-size:0.85rem;
-    color:var(--text); background:var(--glass); border:1px solid var(--border);
-    padding:12px 20px; border-radius:9px; text-decoration:none;
-    backdrop-filter:blur(10px); transition:border-color .2s, transform .2s;
-  }
-  .btn-ghost:hover{border-color:var(--cyan); transform:translateY(-2px);}
-
-  .about-grid{display:grid; grid-template-columns:1.15fr 0.85fr; gap:56px;}
-  @media (max-width:760px){ .about-grid{grid-template-columns:1fr;} }
-  .about-grid p{color:var(--muted); margin-bottom:16px; font-size:1.02rem;}
-  .about-grid strong{color:var(--text); font-weight:600;}
-  .glass-card{
-    background:var(--glass); border:1px solid var(--border); border-radius:14px;
-    padding:26px; backdrop-filter:blur(16px);
-  }
-  .info-card .row{display:flex; justify-content:space-between; padding:11px 0; border-bottom:1px solid var(--border); font-size:0.9rem;}
-  .info-card .row:last-child{border-bottom:none;}
-  .info-card .row span:first-child{color:var(--muted);}
-  .info-card .row span:last-child{font-family:var(--mono); font-size:0.85rem; color:var(--cyan);}
-
-  h2{font-size:clamp(1.7rem,3.8vw,2.3rem); margin-bottom:36px;}
-  .skill-groups{display:grid; grid-template-columns:repeat(2,1fr); gap:28px;}
-  @media (max-width:760px){ .skill-groups{grid-template-columns:1fr;} }
-  .skill-group .group-label{font-family:var(--mono); font-size:0.75rem; color:var(--muted); letter-spacing:0.06em; text-transform:uppercase; margin-bottom:14px; display:block;}
-  .skill-list{display:flex; flex-wrap:wrap; gap:9px;}
-  .pill{
-    font-size:0.88rem; padding:9px 15px; color:var(--text);
-    background:var(--glass); border:1px solid var(--border); border-radius:999px;
-    backdrop-filter:blur(10px); transition:border-color .2s, transform .2s, box-shadow .2s;
-  }
-  .pill:hover{border-color:var(--cyan); transform:translateY(-2px); box-shadow:0 0 24px rgba(34,211,238,0.18);}
-
-  .timeline{position:relative; padding-left:30px;}
-  .timeline::before{content:""; position:absolute; left:5px; top:6px; bottom:6px; width:2px; background:linear-gradient(var(--violet), var(--cyan)); opacity:0.5;}
-  .t-item{position:relative; padding-bottom:42px;}
-  .t-item:last-child{padding-bottom:0;}
-  .t-item::before{
-    content:""; position:absolute; left:-30px; top:4px;
-    width:12px; height:12px; border-radius:50%;
-    background:var(--gradient);
-    box-shadow:0 0 16px rgba(139,92,246,0.6);
-  }
-  .t-item h3{font-size:1.12rem; margin-bottom:4px;}
-  .t-item .meta{font-family:var(--mono); font-size:0.8rem; color:var(--muted); margin-bottom:8px;}
-  .t-item p{color:var(--muted); font-size:0.95rem;}
-  .badge-mention{
-    display:inline-block; margin-top:10px;
-    font-family:var(--mono); font-size:0.72rem;
-    background:rgba(139,92,246,0.15); color:#c4b5fd;
-    border:1px solid rgba(139,92,246,0.3);
-    padding:4px 10px; border-radius:6px;
-  }
-
-  .exp-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:20px;}
-  .exp-card{
-    background:var(--glass); border:1px solid var(--border); border-radius:14px; padding:22px;
-    backdrop-filter:blur(14px); transition:border-color .2s, transform .2s;
-  }
-  .exp-card:hover{border-color:var(--violet); transform:translateY(-3px);}
-  .exp-card h3{font-size:1rem; margin-bottom:3px;}
-  .exp-card .org{font-family:var(--mono); font-size:0.78rem; color:var(--cyan); margin-bottom:12px;}
-  .exp-card ul{padding-left:18px; color:var(--muted); font-size:0.92rem;}
-  .exp-card li{margin-bottom:6px;}
-
-  .case{
-    background:var(--glass); border:1px solid var(--border); border-radius:18px;
-    padding:38px; margin-bottom:26px; backdrop-filter:blur(16px);
-  }
-  .case-head{display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:8px; margin-bottom:18px;}
-  .case-head h3{font-size:1.4rem;}
-  .status{
-    font-family:var(--mono); font-size:0.7rem; letter-spacing:0.05em;
-    color:#6ee7c9; background:rgba(34,211,238,0.12); border:1px solid rgba(34,211,238,0.3);
-    padding:4px 10px; border-radius:6px; text-transform:uppercase;
-  }
-  .case .lede{color:var(--muted); margin-bottom:26px; max-width:620px;}
-  .case-steps{display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-bottom:26px;}
-  @media (max-width:700px){ .case-steps{grid-template-columns:1fr;} }
-  .case-step{border-left:2px solid var(--violet); padding-left:16px;}
-  .case-step .k{font-family:var(--mono); font-size:0.72rem; color:var(--cyan); letter-spacing:0.06em; text-transform:uppercase; margin-bottom:6px; display:block;}
-  .case-step p{color:var(--muted); font-size:0.92rem;}
-
-  .frame{border:1px solid var(--border); border-radius:12px; overflow:hidden; margin-bottom:22px; background:rgba(0,0,0,0.25);}
-  .frame .bar{display:flex; gap:6px; padding:11px 14px; background:rgba(255,255,255,0.03); border-bottom:1px solid var(--border);}
-  .frame .bar span{width:8px; height:8px; border-radius:50%; background:rgba(255,255,255,0.15);}
-  .frame img{width:100%; display:block;}
-  .frame pre{padding:20px; overflow-x:auto; margin:0; font-family:var(--mono); font-size:0.8rem; color:#a5f3d5;}
-
-  .case-results{display:flex; gap:36px; flex-wrap:wrap; margin-bottom:22px;}
-  .case-results div{font-family:var(--mono); font-size:0.72rem; color:var(--muted); text-transform:uppercase; letter-spacing:0.06em;}
-  .case-results strong{display:block; font-family:var(--display); color:var(--text); font-size:1.3rem; margin-top:6px; font-weight:600;}
-
-  .learned{
-    background:linear-gradient(120deg, rgba(139,92,246,0.1), rgba(34,211,238,0.08));
-    border:1px solid var(--border);
-    border-radius:12px; padding:18px 22px; color:var(--text); font-size:0.92rem;
-  }
-  .learned strong{background:var(--gradient); -webkit-background-clip:text; background-clip:text; color:transparent;}
-
-  .case-links{margin-top:20px;}
-  .case-links a{
-    font-family:var(--mono); font-size:0.82rem; color:var(--cyan);
-    text-decoration:none; border-bottom:1px solid var(--cyan); padding-bottom:2px;
-  }
-
-  .contact-list{display:flex; flex-direction:column; gap:14px; max-width:480px;}
-  .contact-list a{
-    display:flex; align-items:center; gap:14px; text-decoration:none;
-    font-family:var(--mono); font-size:0.95rem;
-    background:var(--glass); border:1px solid var(--border); padding:17px 20px; border-radius:12px;
-    backdrop-filter:blur(12px); transition:border-color .2s, transform .2s;
-  }
-  .contact-list a:hover{border-color:var(--violet); transform:translateX(6px);}
-  .dot{width:8px; height:8px; border-radius:50%; background:var(--gradient); box-shadow:0 0 10px rgba(139,92,246,0.7);}
-
-  footer{text-align:center; padding:48px 6vw; font-family:var(--mono); font-size:0.78rem; color:var(--muted); position:relative; z-index:1;}
-
-  @media (prefers-reduced-motion: reduce){ *{animation:none !important; transition:none !important;} }
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="blob blob-1"></div>
-<div class="blob blob-2"></div>
-<div class="blob blob-3"></div>
+<aside class="sidebar">
+  <div class="name">Gabriel Izzo</div>
+  <div class="role">Bac PRO CIEL, mention très bien<br>→ BTS SIO 2026–2028</div>
 
-<header class="nav">
-  <div class="logo">gabriel<span>.izzo</span></div>
-  <nav class="links">
+  <nav>
     <a href="#about">Profil</a>
     <a href="#skills">Compétences</a>
     <a href="#education">Parcours</a>
+    <a href="#certifications">Certifications</a>
     <a href="#experience">Stages</a>
     <a href="#projects">Projets</a>
     <a href="#contact">Contact</a>
-    <a href="CV.pdf" download>CV ↓</a>
   </nav>
-</header>
+
+  <div class="sidebar-bottom">
+    <a class="btn-cv" href="CV.pdf" download>Télécharger mon CV</a>
+    <div class="sidebar-contact">
+      <a href="mailto:izzo.gabriel.pro@gmail.com">izzo.gabriel.pro@gmail.com</a>
+      <a href="tel:0661507581">06.61.50.75.81</a>
+      <span>Lyon (69001)</span>
+    </div>
+  </div>
+</aside>
 
 <main>
 
-  <section class="hero" id="top">
+  <section id="top">
     <span class="eyebrow">Portfolio</span>
-    <h1>Gabriel Izzo</h1>
-    <div class="role">Bac CIEL, mention très bien → BTS SIO 2026–2028</div>
-    <p class="lede">L'informatique me passionne, et j'explore ses branches — électronique, réseaux, code — pour trouver ma voie. Sérieux, motivé, et curieux de tout ce qui se démonte, se soude ou se code.</p>
-    <div class="prompt">gabriel@portfolio<span class="cursor"></span></div>
-    <div class="tags">
-      <span class="tag">Électronique</span>
-      <span class="tag">Réseaux</span>
-      <span class="tag">Python</span>
-      <span class="tag">HTML / CSS</span>
-      <span class="tag">Impression 3D</span>
-    </div>
-    <div class="cta-row">
-      <a class="btn-cv" href="CV.pdf" download>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg>
-        Télécharger mon CV
-      </a>
-      <a class="btn-ghost" href="#contact">Me contacter</a>
-    </div>
+    <p class="lede">L'informatique me passionne, et j'explore ses branches — <em>électronique, réseaux, code</em> — pour trouver ma voie.</p>
   </section>
 
   <section id="about">
     <span class="eyebrow">Profil</span>
     <h2>À propos</h2>
-    <div class="about-grid">
-      <div>
-        <p>Actuellement en dernière année de <strong>Bac PRO CIEL</strong> (Cybersécurité, Informatique et réseaux, Électronique) au lycée professionnel Jacques de Flesselles, obtenu avec <strong>mention très bien</strong>.</p>
-        <p>À la rentrée 2026, je rejoins le <strong>BTS SIO</strong> (Services Informatique aux Organisations) au lycée Jacques Brel, pour approfondir le développement et l'administration des systèmes.</p>
-        <p>Mon parcours en stages m'a fait toucher à peu près tout ce qui compose un poste de travail : installation électrique, diagnostic matériel, réseau, et un peu de code.</p>
-      </div>
-      <div class="glass-card info-card">
-        <div class="row"><span>Localisation</span><span>Lyon (69001)</span></div>
-        <div class="row"><span>Téléphone</span><span>06.61.50.75.81</span></div>
-        <div class="row"><span>Email</span><span>izzo.gabriel.pro@gmail.com</span></div>
-        <div class="row"><span>Langues</span><span>FR, EN (lu et compris)</span></div>
-        <div class="row"><span>Statut</span><span>Étudiant BTS SIO</span></div>
-      </div>
+    <p>Actuellement en dernière année de <strong>Bac PRO CIEL</strong> (Cybersécurité, Informatique et réseaux, Électronique) au lycée professionnel Jacques de Flesselles, obtenu avec <strong>mention très bien</strong>.</p>
+    <p>À la rentrée 2026, je rejoins le <strong>BTS SIO</strong> (Services Informatique aux Organisations) au lycée Jacques Brel, pour approfondir le développement et l'administration des systèmes.</p>
+    <p>Mon parcours en stages m'a fait toucher à peu près tout ce qui compose un poste de travail : installation électrique, diagnostic matériel, réseau, et un peu de code.</p>
+    <div class="info-strip">
+      <div><span class="k">Langues</span>FR, EN (lu et compris)</div>
+      <div><span class="k">Statut</span>Étudiant BTS SIO</div>
+      <div><span class="k">Localisation</span>Lyon (69001)</div>
     </div>
   </section>
 
@@ -298,22 +57,18 @@
     <span class="eyebrow">Compétences</span>
     <h2>Ce que je sais faire</h2>
     <div class="skill-groups">
-      <div class="skill-group">
+      <div>
         <span class="group-label">Hardware</span>
-        <div class="skill-list">
-          <span class="pill">Circuits imprimés</span>
-          <span class="pill">Soudure</span>
-          <span class="pill">Montage / démontage PC</span>
-          <span class="pill">Impression 3D</span>
-        </div>
+        <span class="pill">Circuits imprimés</span>
+        <span class="pill">Soudure</span>
+        <span class="pill">Montage / démontage PC</span>
+        <span class="pill">Impression 3D</span>
       </div>
-      <div class="skill-group">
-        <span class="group-label">Software & Réseaux</span>
-        <div class="skill-list">
-          <span class="pill">Python</span>
-          <span class="pill">HTML / CSS</span>
-          <span class="pill">Réseaux</span>
-        </div>
+      <div>
+        <span class="group-label">Software &amp; Réseaux</span>
+        <span class="pill">Python</span>
+        <span class="pill">HTML / CSS</span>
+        <span class="pill">Réseaux</span>
       </div>
     </div>
   </section>
@@ -321,45 +76,59 @@
   <section id="education">
     <span class="eyebrow">Parcours</span>
     <h2>Formation</h2>
-    <div class="timeline">
-      <div class="t-item">
-        <h3>BTS SIO — Services Informatique aux Organisations</h3>
-        <div class="meta">Lycée Jacques Brel · Vénissieux (69200) · 2026 – 2028</div>
-        <p>Spécialisation à venir en administration des systèmes, réseaux et développement d'applications.</p>
-      </div>
-      <div class="t-item">
-        <h3>BAC CIEL — Cybersécurité, Informatique et réseaux, Électronique</h3>
-        <div class="meta">Lycée professionnel Jacques de Flesselles · Lyon (69001) · 2022 – 2026</div>
-        <p>Formation technique couvrant l'électronique, les réseaux et les bases de la cybersécurité.</p>
-        <span class="badge-mention">Mention très bien</span>
-      </div>
+    <div class="t-item">
+      <h3>BTS SIO — Services Informatique aux Organisations</h3>
+      <div class="meta">Lycée Jacques Brel · Vénissieux (69200) · 2026 – 2028</div>
+      <p>Spécialisation à venir en administration des systèmes, réseaux et développement d'applications.</p>
+    </div>
+    <div class="t-item">
+      <h3>BAC PRO CIEL — Cybersécurité, Informatique et réseaux, Électronique</h3>
+      <div class="meta">Lycée professionnel Jacques de Flesselles · Lyon (69001) · 2022 – 2026</div>
+      <p>Formation technique couvrant l'électronique, les réseaux et les bases de la cybersécurité.</p>
+      <span class="badge">Mention très bien</span>
+    </div>
+  </section>
+
+  <section id="certifications">
+    <span class="eyebrow">Certifications</span>
+    <h2>Certifications</h2>
+    <div class="cert-empty">
+      <strong>À venir</strong>
+      Mes certifications seront ajoutées ici au fil de mon BTS SIO.
     </div>
   </section>
 
   <section id="experience">
     <span class="eyebrow">Stages</span>
     <h2>Expériences professionnelles</h2>
-    <div class="exp-grid">
-      <div class="exp-card">
-        <h3>Recordi, LAB01</h3>
-        <div class="org">Stage de première</div>
+
+    <div class="exp-row">
+      <div class="org">Recordi, LAB01<br>Stage de première</div>
+      <div>
+        <h3>Modélisation, impression 3D et code</h3>
         <ul>
           <li>Modélisation et impression 3D</li>
           <li>Codage simple en HTML, CSS et Python</li>
         </ul>
       </div>
-      <div class="exp-card">
-        <h3>Recordi, MLIS</h3>
-        <div class="org">Stage de première</div>
+    </div>
+
+    <div class="exp-row">
+      <div class="org">Recordi, MLIS<br>Stage de première</div>
+      <div>
+        <h3>Maintenance informatique</h3>
         <ul>
           <li>Réparation, contrôle et test complet d'ordinateurs</li>
           <li>Configuration de postes via clé USB bootable</li>
           <li>Interventions basiques sur le réseau</li>
         </ul>
       </div>
-      <div class="exp-card">
-        <h3>SETO Électricité</h3>
-        <div class="org">Stage de seconde</div>
+    </div>
+
+    <div class="exp-row">
+      <div class="org">SETO Électricité<br>Stage de seconde</div>
+      <div>
+        <h3>Installations électriques</h3>
         <ul>
           <li>Travaux d'installations électriques</li>
           <li>Installation simple (ampoules, câbles, prises hors tension)</li>
@@ -377,50 +146,30 @@
         <h3>Scanner réseau local</h3>
         <span class="status">Terminé</span>
       </div>
-      <p class="lede">Un script Python qui découvre tous les appareils connectés à mon réseau domestique — sans aucun outil ni matériel à acheter, juste mon PC.</p>
+      <p>Un script Python qui découvre tous les appareils connectés à mon réseau domestique — sans aucun outil ni matériel à acheter, juste mon PC.</p>
 
       <div class="case-steps">
-        <div class="case-step">
+        <div>
           <span class="k">Le problème</span>
           <p>Savoir précisément quels appareils sont connectés à ma box, et comprendre comment un réseau local s'organise réellement.</p>
         </div>
-        <div class="case-step">
+        <div>
           <span class="k">La démarche</span>
           <p>Détection du sous-réseau, balayage ping en parallèle (threads) sur les 254 adresses possibles, puis lecture de la table ARP pour les adresses MAC.</p>
         </div>
-        <div class="case-step">
+        <div>
           <span class="k">Le résultat</span>
           <p>Le script tourne du premier coup et retourne une table lisible, avec repérage automatique de mon propre PC.</p>
         </div>
       </div>
-
       <div class="frame">
-        <div class="bar"><span></span><span></span><span></span></div>
-        <pre>$ python scanner_reseau.py
-
-Ton adresse IP     : 192.168.1.154
-Sous-réseau scanné : 192.168.1.0/24
-Scan en cours (ça prend 10-20 secondes)...
-
-4 appareil(s) trouvé(s) :
-
-ADRESSE IP        ADRESSE MAC
---------------------------------------
-192.168.1.14      xx-xx-xx-xx-xx-xx
-192.168.1.149     xx-xx-xx-xx-xx-xx
-192.168.1.154     inconnue              &lt;- ton PC
-192.168.1.254     xx-xx-xx-xx-xx-xx</pre>
-      </div>
-
-      <div class="frame">
-        <div class="bar"><span></span><span></span><span></span></div>
         <img src="Scan_Resultat.png" alt="Résultat du scan réseau dans le terminal">
       </div>
 
       <div class="case-results">
-        <div>APPAREILS DÉTECTÉS<strong>4</strong></div>
-        <div>TENTATIVES AVANT SUCCÈS<strong>1</strong></div>
-        <div>DÉPENDANCES EXTERNES<strong>0</strong></div>
+        <div>Appareils détectés<strong>4</strong></div>
+        <div>Tentatives avant succès<strong>1</strong></div>
+        <div>Dépendances externes<strong>0</strong></div>
       </div>
 
       <div class="learned">
@@ -428,7 +177,7 @@ ADRESSE IP        ADRESSE MAC
       </div>
 
       <div class="case-links">
-        <a href="Scanneur_Reseau.py" download>Télécharger le code (.py)</a>
+        <a href="scanner-reseau.py" download>Télécharger le code (.py)</a>
       </div>
     </div>
 
@@ -437,27 +186,27 @@ ADRESSE IP        ADRESSE MAC
         <h3>Station météo connectée</h3>
         <span class="status">Terminé</span>
       </div>
-      <p class="lede">Une station physique (microcontrôleur MicroPython) qui lit un capteur de température/humidité, affiche les valeurs sur un écran LCD et un bandeau LED, et sert une page web en direct sur le réseau du lycée — sans aucun framework.</p>
+      <p>Une station physique (microcontrôleur MicroPython) qui lit un capteur de température/humidité, affiche les valeurs sur un écran LCD et un bandeau LED, et sert une page web en direct sur le réseau du lycée — sans aucun framework.</p>
 
       <div class="case-steps">
-        <div class="case-step">
+        <div>
           <span class="k">Le problème</span>
           <p>Afficher la météo ambiante sur un objet physique, mais aussi pouvoir la consulter à distance depuis n'importe quel navigateur du réseau.</p>
         </div>
-        <div class="case-step">
+        <div>
           <span class="k">La démarche</span>
           <p>Lecture d'un capteur DHT11, driver bas niveau pour un écran LCD 128×64 en SPI, LED qui change de couleur selon la température, mini serveur web en socket brut.</p>
         </div>
-        <div class="case-step">
+        <div>
           <span class="k">Le résultat</span>
           <p>Affichage en direct sur l'écran, LED qui passe du bleu au rouge selon le seuil, page web qui se rafraîchit automatiquement toutes les 10 secondes.</p>
         </div>
       </div>
 
       <div class="case-results">
-        <div>CAPTEUR<strong>DHT11</strong></div>
-        <div>ÉCRAN<strong>LCD SPI 128×64</strong></div>
-        <div>RAFRAÎCHISSEMENT<strong>10 s</strong></div>
+        <div>Capteur<strong>DHT11</strong></div>
+        <div>Écran<strong>LCD SPI 128×64</strong></div>
+        <div>Rafraîchissement<strong>10 s</strong></div>
       </div>
 
       <div class="learned">
@@ -470,15 +219,21 @@ ADRESSE IP        ADRESSE MAC
     <span class="eyebrow">Contact</span>
     <h2>Me contacter</h2>
     <div class="contact-list">
-      <a href="mailto:izzo.gabriel.pro@gmail.com"><span class="dot"></span>izzo.gabriel.pro@gmail.com</a>
-      <a href="tel:0661507581"><span class="dot"></span>06.61.50.75.81</a>
-      <a href="#" onclick="return false;"><span class="dot"></span>11 Place Croix-Paquet, 69001 Lyon</a>
+      <a href="mailto:izzo.gabriel.pro@gmail.com">izzo.gabriel.pro@gmail.com</a>
+      <a href="tel:0661507581">06.61.50.75.81</a>
+      <a href="#contact">11 Place Croix-Paquet, 69001 Lyon</a>
     </div>
   </section>
 
+  <footer>© 2026 Gabriel Izzo</footer>
+
 </main>
 
-<footer>© 2026 Gabriel Izzo</footer>
+<script>
+  // Bloque le clic droit et le copier-coller
+  document.addEventListener('contextmenu', function (e) { e.preventDefault(); });
+  document.addEventListener('copy', function (e) { e.preventDefault(); });
+</script>
 
 </body>
 </html>
