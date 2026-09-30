@@ -146,5 +146,5 @@
   }
 
   /* Empêche de sélectionner le texte */
-  body { user-select: none; -webkit-user-select: none; }
+  body { user-select: none;  }
   img { pointer-events: none; }
